@@ -1,0 +1,50 @@
+This is playground to try out how Python modules for 
+Data Compression and Archiving. 
+This is mainly covered by the following 2 topic:
+
+ * http://docs.python.org/library/archiving.html
+ * http://docs.python.org/library/shutil.html#archiving-operations
+
+Handling Zip File
+=================
+
+Create zip file from a folder.
+Testing adding files to a zip file.
+Ignore files match certain patterns.
+
+    >>> import os
+    >>> import zipfile
+
+Using the home folder for testing.
+
+    >>> zip_filename = os.path.expanduser(os.path.join("~", 'mytest.zip'))
+    >>> zip = zipfile.ZipFile(zip_filename, "w", 
+    ...     compression=zipfile.ZIP_DEFLATED)
+
+Using oschdir to the root dir, then using os.walk to get all files.
+
+    >>> os.chdir('/tmp')
+    >>> for dirpath, dirnames, filenames in os.walk('.'):
+    ...     for name in filenames:
+    ...         path = os.path.normpath(os.path.join(dirpath, name))
+    ...         if os.path.isfile(path):
+    ...             zip.write(path, path)
+    >>> zip.close()
+
+A peak on shutil module
+=======================
+
+Since Python version 2.7, make_archive is the one stop 
+shop for making archive files by using Python.
+
+    >>> import shutil
+    >>> archive_name = os.path.expanduser(os.path.join('~', 'test'))
+    >>> zip_name = shutil.make_archive(archive_name, 'zip', '/tmp')
+    >>> zip_name == archive_name + ".zip"
+    True
+
+Now check to see if the zip file are created.
+
+    >>> home_folder_files = os.listdir(os.path.expanduser('~'))
+    >>> 'test.zip' in home_folder_files
+    True

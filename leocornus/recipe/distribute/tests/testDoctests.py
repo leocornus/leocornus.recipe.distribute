@@ -33,6 +33,13 @@ def test_suite():
             ),
         )
 
+    suite.addTest(
+        DocFileSuite(
+            'tests/basicDataCompressAndArchiving.txt',
+            package='leocornus.recipe.distribute',
+            ),
+        )
+
     return suite
 
 if __name__ == '__main__':
