@@ -35,7 +35,14 @@ def test_suite():
 
     suite.addTest(
         DocFileSuite(
-            'tests/basicDataCompressAndArchiving.txt',
+            'tests/basicDataCompressAndArchiving.rst',
+            package='leocornus.recipe.distribute',
+            ),
+        )
+
+    suite.addTest(
+        DocFileSuite(
+            'tests/basicLocalFabric.rst',
             package='leocornus.recipe.distribute',
             ),
         )
