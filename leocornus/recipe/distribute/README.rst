@@ -10,15 +10,23 @@ Let's get start.
 Options
 =======
 
-``source-root-dir``
+``source-root``
+
+    The root directory where we find out the packages' source files.
 
 ``packages``
 
+    A list of packages' name followed with verion number.
+
 ``dist-format``
 
-    Available formats: zip, tar, gztar, bztar
+    Available formats: zip, tar, gztar, bztar.
+    Default format is ``zip``.
 
-``output-root-dir``
+``output-root``
+
+    The output root dir, where the archived file saved.  
+    Default is parts directory.
 
 Samples
 =======
@@ -66,20 +74,20 @@ The ``sample_buildout`` is the temp folder for testing.
     ...
     ... [test-source-dist]
     ... recipe = leocornus.recipe.distribute
-    ... source-root-dir = %(srcRoot)s
+    ... source-root = %(srcRoot)s
     ... packages = 
     ...     test-package-one=1.0
     ...     test-package-two=2.0
     ... dist-format = zip
-    ... output-root-dir = %(distRoot)s
+    ... output-root = %(distRoot)s
     ... """ % dict(srcRoot=srcRoot, distRoot=distRoot))
 
 run the buildout
 
     >>> print system(buildout)
-    Installing test-source-dist
-    test-source-dist: Create .../dist-root/test-package-one.1.0.zip
-    test-source-dist: Create .../dist-root/test-package-two.2.0.zip
+    Installing test-source-dist.
+    test-source-dist: Creating package: .../dist-root/test-package-one.1.0.zip
+    test-source-dist: Creating package: .../dist-root/test-package-two.2.0.zip
 
 Read the dist file to verify the result.
 

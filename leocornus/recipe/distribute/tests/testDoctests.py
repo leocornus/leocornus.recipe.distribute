@@ -40,12 +40,13 @@ def test_suite():
             ),
         )
 
-    suite.addTest(
-        DocFileSuite(
-            'tests/basicLocalFabric.rst',
-            package='leocornus.recipe.distribute',
-            ),
-        )
+    # hold this for now, we might not depend on fabric.
+    #suite.addTest(
+    #    DocFileSuite(
+    #        'tests/basicLocalFabric.rst',
+    #        package='leocornus.recipe.distribute',
+    #        ),
+    #    )
 
     return suite
 

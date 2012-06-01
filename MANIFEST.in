@@ -1,2 +1,2 @@
 include *.txt *.rst *.GPL
-recursive-include leocornus *.rst *.py *.zip
+recursive-include leocornus *.rst *.py

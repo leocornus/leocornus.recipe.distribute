@@ -46,14 +46,13 @@ setup(
     zip_safe=False,
     install_requires = [
       'zc.buildout >= 1.4.0',
-      'setuptools',
-      'fabric',],
+      'setuptools',],
     extras_require={
       'test' : ['zope.testing'],
     },
     tests_require = ['zope.testing'],
     test_suite = '%s.tests.test_suite' % name,
 
-    entry_points = { 'zc.buildout' : ['default = leocornus.recipe.distribute:dist',
+    entry_points = { 'zc.buildout' : ['default = leocornus.recipe.distribute:Dist',
                                       ] },
 )
