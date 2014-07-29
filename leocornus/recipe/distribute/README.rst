@@ -39,6 +39,8 @@ Some preparation.
 
     >>> import os
     >>> srcRoot = tmpdir('src-root')
+    >>> print srcRoot
+    /.../src-root
     >>> distRoot = tmpdir('dist-root')
 
 preparting the test pakcages:
@@ -81,13 +83,20 @@ The ``sample_buildout`` is the temp folder for testing.
     ... dist-format = zip
     ... output-root = %(distRoot)s
     ... """ % dict(srcRoot=srcRoot, distRoot=distRoot))
+    >>> ls(sample_buildout)
+    d  bin
+    -  buildout.cfg
+    d  develop-eggs
+    d  eggs
+    d  parts
 
 run the buildout
 
+    >>> os.chdir(sample_buildout)
     >>> print system(buildout)
     Installing test-source-dist.
     test-source-dist: Creating package: .../dist-root/test-package-one.1.0.zip
-    test-source-dist: Creating package: .../dist-root/test-package-two.2.0.zip
+    test-source-dist: Creating package: .../dist-root/test-package-two.2.0.zip...
 
 Read the dist file to verify the result.
 

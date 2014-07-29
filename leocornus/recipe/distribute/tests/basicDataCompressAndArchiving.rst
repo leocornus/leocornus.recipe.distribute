@@ -75,7 +75,7 @@ Since Python version 2.7, make_archive is the one stop
 shop for making archive files by using Python.
 
     >>> archive_name = os.path.expanduser(os.path.join('~', 'test'))
-    >>> zip_name = shutil.make_archive(archive_name, 'zip', '/tmp')
+    >>> zip_name = shutil.make_archive(archive_name, 'zip', '/var/tmp')
     >>> zip_name == archive_name + ".zip"
     True
 
