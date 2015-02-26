@@ -40,6 +40,15 @@ def test_suite():
             ),
         )
 
+    # testing the version patterns.
+    # try to find the version from a file, likely a README.txt
+    suite.addTest(
+        DocFileSuite(
+            'tests/versionPatternGrep.rst',
+            package='leocornus.recipe.distribute',
+            ),
+        )
+
     # hold this for now, we might not depend on fabric.
     #suite.addTest(
     #    DocFileSuite(
