@@ -22,8 +22,9 @@ class Dist:
         options.setdefault('output-root', 
             buildout['buildout']['parts-directory'])
 
-        # get the packages.
+        # get the packages options.
         pkgs = options.get('packages', '').strip().splitlines()
+        # the packages will have name, version format.
         self.packages = [package.strip().split('=') for package in pkgs if package.strip()]
 
     # install method.
