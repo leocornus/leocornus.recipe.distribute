@@ -47,10 +47,21 @@ a file.
     0
     >>> f = open(fileOne, 'r+')
     >>> f.write("This is a test.\n")
+    >>> f.write(
+    ... """This line count too
+    ... line two
+    ... This is line three
+    ... """)
     >>> f.close()
     >>> f = open(fileOne, 'r')
     >>> f.readline()
     'This is a test.\n'
+    >>> f.readline()
+    'This line count too\n'
+    >>> f.readline()
+    'line two\n'
+    >>> f.readline()
+    'This is line three\n'
     >>> f.close()
 
 Try to search the file name filename pattern
