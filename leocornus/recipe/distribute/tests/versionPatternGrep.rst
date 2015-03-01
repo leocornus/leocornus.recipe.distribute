@@ -35,6 +35,12 @@ Create folders.
     >>> os.mkdir(testFolder)
     >>> os.mkdir(folderOne)
     >>> os.mkdir(folderTwo)
+    >>> os.path.isdir(testFolder)
+    True
+    >>> os.path.isdir(folderOne)
+    True
+    >>> os.path.isdir(folderTwo)
+    True
 
 open file to write. the mode **r+** is for both read and write
 a file.
@@ -68,15 +74,17 @@ Try to search the file name filename pattern
 
     >>> for file in os.listdir(testFolder):
     ...     print file
-    ...     if fnmatch.fnmatch(file, '*.txt'):
+    ...     if fnmatch.fnmatch(file, '.txt'):
     ...         print file
     'folderOne'
     'folderTwo'
 
-Testing walk method.
+Testing os.walk method.
+It is very useful. we need have an option called **depth**,
+which will set how deep of the subdirectory.
 
     >>> for root, dirs, files in os.walk(testFolder):
-    ...     print root
+    ...     print 'root: ' + root
     ...     print dirs
     ...     print files
 
