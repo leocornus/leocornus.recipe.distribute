@@ -10,6 +10,13 @@ TODO
 - search file name pattern in a folder to get a list of files
 - search pattern in file content to get the version number
 
+we need search the following file types:
+
+- WordPress plugin
+- WordPress themes
+- MediaWiki extension
+- MediaWiki skin
+
 import modules
 --------------
 
