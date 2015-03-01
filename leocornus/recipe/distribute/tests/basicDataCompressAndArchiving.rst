@@ -37,7 +37,7 @@ Get ready the ZipFile object.
     >>> zip = zipfile.ZipFile(zip_filename, "w", 
     ...     compression=zipfile.ZIP_DEFLATED)
 
-Using oschdir to the root dir, then using os.walk to get all files.
+Using os.chdir to the root dir, then using os.walk to get all files.
 
     >>> os.chdir(homeFolder)
     >>> for dirpath, dirnames, filenames in os.walk('./testfolder'):
@@ -63,7 +63,8 @@ So using different way to verify.
 now some clean up...
 os.rmdir can ONLY remove empty folder.
 shutil.rmtree offers a convenient way to remove the whole folder, 
-even it is NOT an empty folder.  This method was added since Python 2.6
+even it is NOT an empty folder.  
+This method was added since Python 2.6
 
     >>> shutil.rmtree(testFolder)
     >>> os.remove(os.path.join(homeFolder, 'mytest.zip'))
