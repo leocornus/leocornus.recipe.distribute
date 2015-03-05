@@ -14,3 +14,11 @@ A simple buildout part to archive all skins in wiki skin folder::
 
 The **packages = *** tells the distribute recipe to archive all
 folders in the source-root folder.
+
+More details in 
+`package README.rst <leocornus/recipe/distribute/README.rst>`_
+
+License
+-------
+
+`GPL license <LICENSE.GPL>`_
