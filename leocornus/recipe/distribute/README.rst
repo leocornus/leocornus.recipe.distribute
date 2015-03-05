@@ -140,3 +140,51 @@ verify package two
     True
     >>> 'test-package-two/folder2two/folder2two2/filetwo2.txt' in files
     True
+
+Sample to distribute whole folder
+=================================
+
+We will distirbue the whole WordPress plugins or themes folder.
+Here a list of things we are going to do:
+
+- preparing some testing folders and files to simulate WordPress
+  Plugins and Themes
+- create **buildout.cfg** with the distribute recipe to archive all
+  plugins and themes
+- verify the generated zip files have the correct content.
+
+Prepare Plugins and Themes
+--------------------------
+
+We will use the same testing folders and files from previous example.
+
+Create the buildout file
+------------------------
+
+The buildout will be very simple.
+
+    >>> write(sample_buildout, 'buildout.cfg',
+    ... """
+    ... [buildout]
+    ... parts =
+    ...     test-source-dist
+    ...
+    ... [test-source-dist]
+    ... recipe = leocornus.recipe.distribute
+    ... source-root = %(srcRoot)s
+    ... packages = *
+    ... dist-format = zip
+    ... output-root = %(distRoot)s
+    ... """ % dict(srcRoot=srcRoot, distRoot=distRoot))
+    >>> ls(sample_buildout)
+    -  .installed.cfg
+    d  bin
+    -  buildout.cfg
+    d  develop-eggs
+    d  eggs
+    d  parts
+
+Execute and Verify
+------------------
+
+Read the zip file and verify the content.
