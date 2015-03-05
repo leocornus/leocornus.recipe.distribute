@@ -1,3 +1,5 @@
+.. contents:: Table of Contents
+   :depth: 5
 
 Overview
 ========
@@ -28,12 +30,16 @@ Options
     The output root dir, where the archived file saved.  
     Default is parts directory.
 
-Samples
-=======
+Sample for distribute exact packages
+====================================
 
 Samples here are based on zc.buildout's testing support.
-Check http://pypi.python.org/pypi/zc.buildout/1.5.2#testing-support for more
-details.
+Check `testing support 
+<http://pypi.python.org/pypi/zc.buildout/1.5.2#testing-support>`_ 
+for more details.
+
+Preparing Dirs and Files
+------------------------
 
 Some preparation.
 
@@ -67,6 +73,9 @@ write some testing files too.
     >>> write(packagetwo, 'folder2one', 'fileone.txt', 'File one content')
     >>> write(packagetwo, 'folder2two', 'folder2two2', 'filetwo2.txt', 'file two 2 content')
 
+Create the buildout.cfg
+-----------------------
+
 The sample buildout config file.
 The ``sample_buildout`` is the temp folder for testing.
 
@@ -92,6 +101,9 @@ The ``sample_buildout`` is the temp folder for testing.
     d  eggs
     d  parts
 
+Execute and Verify
+------------------
+
 run the buildout
 
     >>> os.chdir(sample_buildout)
@@ -116,7 +128,7 @@ Read the dist file to verify the result.
     >>> 'test-package-one/foldertwo/foldertwo2/filetwo2.txt' in files
     True
 
-Package two
+verify package two
 
     >>> thezip = zipfile.ZipFile(os.path.join(distRoot, 'test-package-two.2.0.zip'), "r")
     >>> files = thezip.namelist()
