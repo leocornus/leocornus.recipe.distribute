@@ -4,6 +4,12 @@ This is mainly covered by the following topics:
 * https://docs.python.org/2/library/re.html
 * https://docs.python.org/2/tutorial/inputoutput.html
 
+MOVED
+-----
+
+This story is moved to new location:
+`leocornus.py.sandbox Search and Archive Story <https://github.com/leocornus/leocornus.buildout.cfgrepo/blob/master/sample/python/src/leocornus.py.sandbox/leocornus/py/sandbox/tests/searchArchiveStory.rst>`_
+
 TODO
 ----
 
@@ -79,21 +85,18 @@ a file.
 
 Try to search the file name filename pattern
 
-    >>> for file in os.listdir(testFolder):
-    ...     print file
+    >>> files = os.listdir(testFolder)
+    >>> 'folderOne' in files
+    True
+    >>> 'folderTwo' in files
+    True
+    >>> for file in files:
     ...     if fnmatch.fnmatch(file, '.txt'):
     ...         print file
-    'folderOne'
-    'folderTwo'
 
 Testing os.walk method.
 It is very useful. we need have an option called **depth**,
 which will set how deep of the subdirectory.
-
-    >>> for root, dirs, files in os.walk(testFolder):
-    ...     print 'root: ' + root
-    ...     print dirs
-    ...     print files
 
 Questions
 ---------
