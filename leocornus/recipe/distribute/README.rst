@@ -42,6 +42,8 @@ Some preparation.
     >>> print srcRoot
     /.../src-root
     >>> distRoot = tmpdir('dist-root')
+    >>> print distRoot
+    /.../dist-root
 
 preparting the test pakcages:
 create some folders,
