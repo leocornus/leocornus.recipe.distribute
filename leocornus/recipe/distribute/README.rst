@@ -219,7 +219,8 @@ Execute the buildout
     >>> print system(buildout)
     Uninstalling test-source-dist.
     Installing test-source-dist.
-    test-source-dist: No Package Specified!
+    test-source-dist: Creating package: .../test-package-one.2.3.4.zip
+    test-source-dist: Creating package: .../test-package-two.3.4.5.zip
     ...
 
 Read the zip file and verify the content.

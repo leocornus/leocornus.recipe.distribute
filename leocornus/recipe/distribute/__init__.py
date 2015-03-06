@@ -4,6 +4,7 @@
 import logging
 import os
 import zipfile
+import subprocess
 
 class Dist:
     """The main class.
@@ -25,10 +26,19 @@ class Dist:
         # get the packages options.
         pkgs = options.get('packages', '').strip()
         if pkgs == 'ALL':
-            self.packages = ''
+            # query the whole source folder for certain patterns.
+            # and then get ready the package list.
+            sourceRoot = self.options.get('source-root')
+            self.packages = self.wpPackages(sourceRoot)
         else:
             pkgs = pkgs.splitlines()
             # the packages will have name, version format.
+            # here is an example::
+            #
+            #   packages = [
+            #     [nameone, versionone],
+            #     [nametwo, versiontwo]
+            #   ]
             self.packages = [package.strip().split('=') 
                              for package in pkgs if package.strip()]
 
@@ -37,6 +47,7 @@ class Dist:
 
         log = logging.getLogger(self.name)
         if self.packages == '':
+            # return without do anything.
             log.info('No Package Specified!')
             return []
 
@@ -52,6 +63,35 @@ class Dist:
     def update(self):
 
         pass
+
+    # query source folder to find WordPress Plugins or Themes.
+    def wpPackages(self, srcRoot):
+
+        # using grep the query files in the source folder.
+        # the plugin grep query pattern.
+        pluginPattern = "grep -l 'Plugin Name: ' " + \
+                        srcRoot + "/*/*.php"
+        plugins = subprocess.check_output(pluginPattern, shell=True)
+        # the theme grep query pattern.
+        themePattern = "grep -l 'Theme Name: ' " + \
+                       srcRoot + "/*/style.css"
+        themes = subprocess.check_output(themePattern, shell=True)
+        packages = plugins + themes
+        pkgs = []
+        for package in packages.strip().splitlines():
+            dirName = os.path.dirname(package)
+            # package name
+            pkgName = os.path.basename(dirName)
+            # version grep pattern.
+            versionPattern = "grep -oE 'Version: .*' " + package
+            version = subprocess.check_output(versionPattern,
+                                              shell=True)
+            # clean up 
+            version = version.strip().split(":")
+            pkgVersion = version[1].strip()
+            pkgs.append([pkgName, pkgVersion])
+
+        return pkgs
 
     # make zip distribute
     def zipdist(self, srcRoot, distRoot, packages):
