@@ -8,7 +8,7 @@ A simple buildout part to archive all skins in wiki skin folder::
   [archive-skins]
   recipe = leocornus.recipe.distribute
   source-root = /full/path/to/wiki/skins
-  packages = *
+  packages = ALL
   dist-format = zip
   output-root = /full/path/to/archive/folder
 
@@ -17,6 +17,14 @@ folders in the source-root folder.
 
 More details in 
 `package README.rst <leocornus/recipe/distribute/README.rst>`_
+
+Change Logs
+-----------
+
+Release 2.0.0
+
+- Ability to distribute all WordPress plugins and themes under
+  a folder.
 
 License
 -------
