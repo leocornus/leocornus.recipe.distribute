@@ -158,6 +158,32 @@ Prepare Plugins and Themes
 
 We will use the same testing folders and files from previous example.
 
+Make a WordPres Plugin package, could be any PHP file.
+
+    >>> pluginData = """
+    ... /**
+    ...  * Plugin Name: Package One
+    ...  * Description: this the a dummy testing plugin.
+    ...  * Version: 2.3.4
+    ...  */
+    ... ** Some other content.
+    ... """
+    >>> write(packageOne, 'pone.php', pluginData)
+
+Make a WordPress Theme package, 
+has to be the exact file name **style.css**.
+
+    >>> themeData = """
+    ... /**
+    ...  * Theme Name: Package Two Theme.
+    ...  * Description: this is a dummy theme for testing.
+    ...  * Version: 3.4.5
+    ...  * other header content.
+    ...  */
+    ... ** other style contnet.
+    ... """
+    >>> write(packagetwo, 'style.css', themeData)
+
 Create the buildout file
 ------------------------
 
@@ -187,4 +213,20 @@ The buildout will be very simple.
 Execute and Verify
 ------------------
 
+Execute the buildout
+
+    >>> os.chdir(sample_buildout)
+    >>> print system(buildout)
+    Uninstalling test-source-dist.
+    Installing test-source-dist.
+    ...
+
 Read the zip file and verify the content.
+We will expect the following files are created:
+
+    >>> pOne = os.path.join(distRoot, 'test-package-one.2.3.4.zip')
+    >>> os.path.exists(pOne)
+    True
+    >>> tTwo = os.path.join(distRoot, 'test-package-two.3.4.5.zip')
+    >>> os.path.exists(tTwo)
+    True
