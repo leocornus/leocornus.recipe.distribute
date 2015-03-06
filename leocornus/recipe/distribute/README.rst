@@ -198,7 +198,7 @@ The buildout will be very simple.
     ... [test-source-dist]
     ... recipe = leocornus.recipe.distribute
     ... source-root = %(srcRoot)s
-    ... packages = *
+    ... packages = ALL
     ... dist-format = zip
     ... output-root = %(distRoot)s
     ... """ % dict(srcRoot=srcRoot, distRoot=distRoot))
@@ -219,6 +219,7 @@ Execute the buildout
     >>> print system(buildout)
     Uninstalling test-source-dist.
     Installing test-source-dist.
+    test-source-dist: No Package Specified!
     ...
 
 Read the zip file and verify the content.

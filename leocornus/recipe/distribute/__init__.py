@@ -23,14 +23,22 @@ class Dist:
             buildout['buildout']['parts-directory'])
 
         # get the packages options.
-        pkgs = options.get('packages', '').strip().splitlines()
-        # the packages will have name, version format.
-        self.packages = [package.strip().split('=') for package in pkgs if package.strip()]
+        pkgs = options.get('packages', '').strip()
+        if pkgs == 'ALL':
+            self.packages = ''
+        else:
+            pkgs = pkgs.splitlines()
+            # the packages will have name, version format.
+            self.packages = [package.strip().split('=') 
+                             for package in pkgs if package.strip()]
 
     # install method.
     def install(self):
 
         log = logging.getLogger(self.name)
+        if self.packages == '':
+            log.info('No Package Specified!')
+            return []
 
         sourceRoot = self.options.get('source-root')
         outputRoot = self.options.get('output-root')
