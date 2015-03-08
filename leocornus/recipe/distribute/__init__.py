@@ -88,7 +88,7 @@ class Dist:
             version = subprocess.check_output(versionPattern,
                                               shell=True)
             # clean up 
-            version = version.strip().split(":")
+            version = version.strip().split(b":")
             pkgVersion = version[1].strip()
             pkgs.append([pkgName, pkgVersion])
 
