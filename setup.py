@@ -51,7 +51,7 @@ setup(
       'test' : ['zope.testing'],
     },
     tests_require = ['zope.testing'],
-    test_suite = '%s.tests.test_suite' % name,
+    test_suite = '%s.tests.testDoctests.test_suite' % name,
 
     entry_points = { 'zc.buildout' : ['default = leocornus.recipe.distribute:Dist',
                                       ] },
