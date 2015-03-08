@@ -3,6 +3,8 @@ leocornus.recipe.distribute
 
 A buildout recipe to package and distribute lib, module, archive, files, etc.
 
+Travis Build Status: |travis|
+
 A simple buildout part to archive all skins in wiki skin folder::
 
   [archive-skins]
@@ -30,3 +32,5 @@ License
 -------
 
 `GPL license <LICENSE.GPL>`_
+
+.. |travis| image:: https://api.travis-ci.org/leocornus/leocornus.recipe.distribute.png
