@@ -65,8 +65,8 @@ a file.
     >>> os.system("touch " + fileTwo)
     0
     >>> f = open(fileOne, 'r+')
-    >>> f.write("This is a test.\n")
-    >>> f.write(
+    >>> count = f.write("This is a test.\n")
+    >>> count = f.write(
     ... """This line count too
     ... line two
     ... This is line three
@@ -92,7 +92,7 @@ Try to search the file name filename pattern
     True
     >>> for file in files:
     ...     if fnmatch.fnmatch(file, '.txt'):
-    ...         print file
+    ...         print(file)
 
 Testing os.walk method.
 It is very useful. we need have an option called **depth**,

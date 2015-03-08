@@ -83,7 +83,8 @@ class Dist:
             # package name
             pkgName = os.path.basename(dirName)
             # version grep pattern.
-            versionPattern = "grep -oE 'Version: .*' " + package
+            versionPattern = "grep -oE 'Version: .*' "
+            versionPattern = versionPattern + package
             version = subprocess.check_output(versionPattern,
                                               shell=True)
             # clean up 
