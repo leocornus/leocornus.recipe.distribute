@@ -6,7 +6,7 @@ Overview
 
 Let's get start.
 
-    >>> print 'Hello'
+    >>> print('Hello')
     Hello
 
 Options
@@ -45,10 +45,10 @@ Some preparation.
 
     >>> import os
     >>> srcRoot = tmpdir('src-root')
-    >>> print srcRoot
+    >>> print(srcRoot)
     /.../src-root
     >>> distRoot = tmpdir('dist-root')
-    >>> print distRoot
+    >>> print(distRoot)
     /.../dist-root
 
 preparting the test pakcages:
@@ -107,7 +107,7 @@ Execute and Verify
 run the buildout
 
     >>> os.chdir(sample_buildout)
-    >>> print system(buildout)
+    >>> print(system(buildout))
     Installing test-source-dist.
     test-source-dist: Creating package: .../dist-root/test-package-one.1.0.zip
     test-source-dist: Creating package: .../dist-root/test-package-two.2.0.zip...
@@ -216,7 +216,7 @@ Execute and Verify
 Execute the buildout
 
     >>> os.chdir(sample_buildout)
-    >>> print system(buildout)
+    >>> print(system(buildout))
     Uninstalling test-source-dist.
     Installing test-source-dist.
     test-source-dist: Creating package: .../test-package-one.2.3.4.zip
