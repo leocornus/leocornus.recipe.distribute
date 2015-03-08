@@ -105,14 +105,14 @@ class Dist:
         os.chdir(srcRoot)
         for package, version in packages:
             # preparing the zip file name
-            zipFilename = package + "." + version + ".zip"
+            zipFilename = package + b"." + version + b".zip"
             # we need the full path.
             zipFilename = os.path.join(distRoot, zipFilename)
             log.info('Creating package: %s' % zipFilename)
 
             zip = zipfile.ZipFile(zipFilename, "w",
                 compression = zipfile.ZIP_DEFLATED)
-            for dirpath, dirnames, filenames in os.walk('./' + package):
+            for dirpath, dirnames, filenames in os.walk(b'./' + package):
                 for name in filenames:
                     path = os.path.normpath(os.path.join(dirpath, name))
                     if os.path.isfile(path):
