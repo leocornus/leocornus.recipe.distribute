@@ -14,7 +14,7 @@ A simple buildout part to archive all skins in wiki skin folder::
   dist-format = zip
   output-root = /full/path/to/archive/folder
 
-The **packages = *** tells the distribute recipe to archive all
+The **packages = ALL** tells the distribute recipe to archive all
 folders in the source-root folder.
 
 More details in 
