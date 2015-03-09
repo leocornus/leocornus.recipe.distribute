@@ -110,7 +110,8 @@ run the buildout
     >>> print(system(buildout))
     Installing test-source-dist.
     test-source-dist: Creating package: .../dist-root/test-package-one.1.0.zip
-    test-source-dist: Creating package: .../dist-root/test-package-two.2.0.zip...
+    test-source-dist: Creating package: .../dist-root/test-package-two.2.0.zip
+    test-source-dist: Creating versions list file: .../dist-root/versions.txt...
 
 Read the dist file to verify the result.
 
@@ -140,6 +141,14 @@ verify package two
     True
     >>> 'test-package-two/folder2two/folder2two2/filetwo2.txt' in files
     True
+
+verify the versions list file.
+
+    >>> versions = open(os.path.join(distRoot, 'versions.txt'), 'r')
+    >>> for line in versions:
+    ...     print(line)
+    test-package-one=1.0
+    test-package-two=2.0
 
 Sample to distribute whole folder
 =================================

@@ -100,10 +100,17 @@ class Dist:
         log = logging.getLogger(self.name)
         # return the installed parts.
         parts = []
+        # get ready the version list file, the content
+        # packageone=versone
+        # packagetwo=versiontwo
+        versionsList = os.path.join(distRoot, 'versions.txt')
+        versions = open(versionsList, 'w')
 
         # work on the srouce root dir.
         os.chdir(srcRoot)
         for package, version in packages:
+            # write to versions list
+            versions.write("""%s=%s\n""" % (package, version))
             # preparing the zip file name
             zipFilename = package + b"." + version + b".zip"
             # we need the full path.
@@ -120,5 +127,9 @@ class Dist:
             # close to write to disk.
             zip.close()
             parts.append(zipFilename)
+
+        # save the versions list file.
+        log.info('Creating versions list file: %s' % versionsList)
+        versions.close()
 
         return parts
