@@ -71,11 +71,19 @@ class Dist:
         # the plugin grep query pattern.
         pluginPattern = "grep -l 'Plugin Name: ' " + \
                         srcRoot + "/*/*.php"
-        plugins = subprocess.check_output(pluginPattern, shell=True)
+        try:
+            plugins = subprocess.check_output(pluginPattern, shell=True)
+        except subprocess.CalledProcessError:
+            # logging no plugin found.
+            plugins = ""
         # the theme grep query pattern.
         themePattern = "grep -l 'Theme Name: ' " + \
                        srcRoot + "/*/style.css"
-        themes = subprocess.check_output(themePattern, shell=True)
+        try:
+            themes = subprocess.check_output(themePattern, shell=True)
+        except subprocess.CalledProcessError:
+            # logging not theme found.
+            themes = ""
         packages = plugins + themes
         pkgs = []
         for package in packages.strip().splitlines():
