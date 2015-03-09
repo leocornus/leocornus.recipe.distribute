@@ -16,6 +16,11 @@ A simple buildout part to archive all skins in wiki skin folder::
 
 The **packages = ALL** tells the distribute recipe to archive all
 folders in the source-root folder.
+A versions list text file (versions.txt) will be generated to 
+list all packages in the following fomat::
+
+  packageone=1.0
+  packagetwo=2.0
 
 More details in 
 `package README.rst <leocornus/recipe/distribute/README.rst>`_
