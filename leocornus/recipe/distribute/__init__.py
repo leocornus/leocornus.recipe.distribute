@@ -93,8 +93,14 @@ class Dist:
             # version grep pattern.
             versionPattern = "grep -oE 'Version: .*' " \
                              + package.decode('ascii')
-            version = subprocess.check_output(versionPattern,
-                                              shell=True)
+            try:
+                version = subprocess.check_output(versionPattern,
+                                                  shell=True)
+            except subprocess.CalledProcessError:
+                # Version pattern is not found, give
+                # default version 1.0
+                # logging the message...
+                version = """Version: 1.0"""
             # clean up 
             version = version.strip().split(b":")
             pkgVersion = version[1].strip()
