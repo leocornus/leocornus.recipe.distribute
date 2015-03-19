@@ -1,4 +1,4 @@
-|travis|_ |pypi-version|_ |pypi-download|_ |pypi-license|_
+|travis|_ |pypi-version|_ |pypi-download|_ |pypi-license|_ |gitter-img|_
 
 leocornus.recipe.distribute
 ===========================
@@ -46,8 +46,6 @@ License
 .. _pypi-download: https://pypi.python.org/pypi/leocornus.recipe.distribute
 .. |pypi-license| image:: http://img.shields.io/pypi/l/leocornus.recipe.distribute.svg
 .. _pypi-license: https://pypi.python.org/pypi/leocornus.recipe.distribute
-
-
-.. image:: https://badges.gitter.im/Join%20Chat.svg
+.. |gitter-img| image:: https://badges.gitter.im/Join%20Chat.svg
    :alt: Join the chat at https://gitter.im/leocornus/leocornus.recipe.distribute
-   :target: https://gitter.im/leocornus/leocornus.recipe.distribute?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+.. _gitter-img: https://gitter.im/leocornus/leocornus.recipe.distribute?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
