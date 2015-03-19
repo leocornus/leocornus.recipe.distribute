@@ -1,4 +1,4 @@
-|travis| |pypi-version| |pypi-download| |pypi-license|
+|travis|_ |pypi-version|_ |pypi-download|_ |pypi-license|_
 
 leocornus.recipe.distribute
 ===========================
