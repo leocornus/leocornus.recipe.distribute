@@ -29,15 +29,12 @@ More details in
 Change Logs
 -----------
 
-Release 2.0.0
-
-- Ability to distribute all WordPress plugins and themes under
-  a folder.
+- `Release 2.2.0 <docs/release-2.2.rst>`_
 
 License
 -------
 
-`GPL license <LICENSE.GPL>`_
+`GPLv2 license <LICENSE.GPL>`_
 
 .. |travis| image:: https://api.travis-ci.org/leocornus/leocornus.recipe.distribute.png
 .. _travis: https://travis-ci.org/leocornus/leocornus.recipe.distribute
