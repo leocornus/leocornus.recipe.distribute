@@ -1,4 +1,5 @@
-|travis|_ |pypi-version|_ |pypi-download|_ |pypi-license|_ |gitter-img|_
+|travis|_ |pypi-version|_ |pypi-download|_ |pypi-license|_ 
+|gitter-img|_
 
 leocornus.recipe.distribute
 ===========================

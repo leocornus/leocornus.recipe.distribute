@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '2.1.1'
+version = '2.1.4'
 name = 'leocornus.recipe.distribute'
 
 def read(*rnames):
@@ -12,17 +12,15 @@ setup(
     version=version,
     description="zc.buildout recipe for package and distribute files, modules, libs, archives, etc.",
     long_description= (
-      read('README.rst')
+      '`Check the GitHub Page <http://github.com/leocornus/%s>`_ for details document\n' % name 
       + '\n' +
-      'Detailed Documentation\n'
-      '**********************\n'
+      'General Usage\n'
+      '*******************\n'
       + '\n' +
       read('leocornus','recipe','distribute','README.rst')
       + '\n' +
-      read('CHANGES.txt')
-      + '\n' +
       'Download\n'
-      '***********************\n'
+      '***************\n'
       ),
     classifiers=[
      'Framework :: Buildout',
