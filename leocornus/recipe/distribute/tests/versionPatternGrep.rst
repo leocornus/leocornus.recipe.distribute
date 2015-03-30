@@ -8,7 +8,7 @@ MOVED
 -----
 
 This story is moved to new location:
-`leocornus.py.sandbox Search and Archive Story <https://github.com/leocornus/leocornus.buildout.cfgrepo/blob/master/sample/python/src/leocornus.py.sandbox/leocornus/py/sandbox/tests/searchArchiveStory.rst>`_
+`leocornus.py.sandbox Search and Archive Story <https://github.com/leocornus/leocornus.py.sandbox/leocornus/py/sandbox/tests/searchArchiveStory.rst>`_
 
 TODO
 ----
