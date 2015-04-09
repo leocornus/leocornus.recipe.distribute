@@ -5,6 +5,7 @@ import logging
 import os
 import zipfile
 import subprocess
+from leocornus.recipe.distribute.utils import extractHeader
 
 class Dist:
     """The main class.
@@ -90,20 +91,11 @@ class Dist:
             dirName = os.path.dirname(package)
             # package name
             pkgName = os.path.basename(dirName)
-            # version grep pattern.
-            versionPattern = "grep -oE 'Version: .*' " \
-                             + package.decode('ascii')
-            try:
-                version = subprocess.check_output(versionPattern,
-                                                  shell=True)
-            except subprocess.CalledProcessError:
-                # Version pattern is not found, give
-                # default version 1.0
-                # logging the message...
-                version = """Version: 1.0"""
-            # clean up 
-            version = version.strip().split(b":")
-            pkgVersion = version[1].strip()
+            # Version pattern is not found, give
+            # default version 1.0
+            pkgVersion = extractHeader('Version:.*', 
+                                       package.decode('ascii'), '1.0')
+            # logging the message...
             pkgs.append([pkgName, pkgVersion])
 
         return pkgs
