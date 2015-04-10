@@ -6,7 +6,9 @@ Release 2.2
 
 
 Save Package Summary as Wiki Page
----------------------------------
+
+Playground for mwclient
+-----------------------
 
 Using mwclient_ to communicate with MediaWiki site.
 Check Python sandbox `mwclient story`_ for how to use mwclient_.

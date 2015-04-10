@@ -5,7 +5,7 @@ import logging
 import os
 import zipfile
 import subprocess
-from leocornus.recipe.distribute.utils import extractHeader
+from leocornus.recipe.distribute.utils import extract_wp_header
 
 class Dist:
     """The main class.
@@ -93,10 +93,10 @@ class Dist:
             pkgName = os.path.basename(dirName)
             # Version pattern is not found, give
             # default version 1.0
-            pkgVersion = extractHeader('Version:.*', 
-                                       package.decode('ascii'), '1.0')
+            header = extract_wp_header(package.decode('ascii'), 
+                                       Version='1.0')
             # logging the message...
-            pkgs.append([pkgName, pkgVersion])
+            pkgs.append([pkgName, header['Version']])
 
         return pkgs
 
