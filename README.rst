@@ -24,7 +24,7 @@ list all packages in the following fomat::
   packagetwo=2.0
 
 More details in 
-`package README.rst <leocornus/recipe/distribute/README.rst>`_
+`package README.rst <leocornus/recipe/distribute>`_
 
 Change Logs
 -----------

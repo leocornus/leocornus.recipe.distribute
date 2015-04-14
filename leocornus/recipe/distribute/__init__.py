@@ -40,8 +40,12 @@ class Dist:
             #     [nameone, versionone],
             #     [nametwo, versiontwo]
             #   ]
-            self.packages = [package.strip().split('=') 
-                             for package in pkgs if package.strip()]
+            self.packages = []
+            for package in pkgs:
+                if package.strip():
+                    name, version = package.strip().split('=')
+                    header = {"Version" : version}
+                    self.packages.append([name, header])
 
     # install method.
     def install(self):
@@ -70,21 +74,21 @@ class Dist:
 
         # using grep the query files in the source folder.
         # the plugin grep query pattern.
-        pluginPattern = "grep -l 'Plugin Name: ' " + \
-                        srcRoot + "/*/*.php"
+        pluginP = "grep -l 'Plugin Name: ' %s/*/*.php" % srcRoot
         try:
-            plugins = subprocess.check_output(pluginPattern, shell=True)
+            plugins = subprocess.check_output(pluginP, shell=True)
         except subprocess.CalledProcessError:
             # logging no plugin found.
             plugins = ""
+
         # the theme grep query pattern.
-        themePattern = "grep -l 'Theme Name: ' " + \
-                       srcRoot + "/*/style.css"
+        themeP = "grep -l 'Theme Name: ' %s/*/style.css" % srcRoot
         try:
-            themes = subprocess.check_output(themePattern, shell=True)
+            themes = subprocess.check_output(themeP, shell=True)
         except subprocess.CalledProcessError:
             # logging not theme found.
             themes = ""
+
         packages = plugins + themes
         pkgs = []
         for package in packages.strip().splitlines():
@@ -96,7 +100,7 @@ class Dist:
             header = extract_wp_header(package.decode('ascii'), 
                                        Version='1.0')
             # logging the message...
-            pkgs.append([pkgName, header['Version']])
+            pkgs.append([pkgName, header])
 
         return pkgs
 
@@ -114,7 +118,8 @@ class Dist:
 
         # work on the srouce root dir.
         os.chdir(srcRoot)
-        for package, version in packages:
+        for package, header in packages:
+            version = header['Version']
             # write to versions list
             versions.write("""%s=%s\n""" % (package, version))
             # preparing the zip file name
