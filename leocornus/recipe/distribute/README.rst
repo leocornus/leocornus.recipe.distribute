@@ -41,7 +41,7 @@ for more details.
 Preparing Dirs and Files
 ------------------------
 
-Some preparation.
+Some preparation.::
 
     >>> import os
     >>> srcRoot = tmpdir('src-root')
@@ -53,7 +53,7 @@ Some preparation.
 
 preparting the test pakcages:
 create some folders,
-write some testing files too.
+write some testing files too.::
 
     >>> packageOne = os.path.join(srcRoot, 'test-package-one')
     >>> mkdir(packageOne)
@@ -77,7 +77,7 @@ Create the buildout.cfg
 -----------------------
 
 The sample buildout config file.
-The ``sample_buildout`` is the temp folder for testing.
+The ``sample_buildout`` is the temp folder for testing.::
 
     >>> write(sample_buildout, 'buildout.cfg',
     ... """
@@ -104,7 +104,7 @@ The ``sample_buildout`` is the temp folder for testing.
 Execute and Verify
 ------------------
 
-run the buildout
+run the buildout::
 
     >>> os.chdir(sample_buildout)
     >>> print(system(buildout))
@@ -113,7 +113,7 @@ run the buildout
     test-source-dist: Creating package: .../dist-root/test-package-two.2.0.zip
     test-source-dist: Creating versions list file: .../dist-root/versions.txt...
 
-Read the dist file to verify the result.
+Read the dist file to verify the result.::
 
     >>> import zipfile
     >>> thezip = zipfile.ZipFile(os.path.join(distRoot, 'test-package-one.1.0.zip'), "r")
@@ -129,7 +129,7 @@ Read the dist file to verify the result.
     >>> 'test-package-one/foldertwo/foldertwo2/filetwo2.txt' in files
     True
 
-verify package two
+verify package two::
 
     >>> thezip = zipfile.ZipFile(os.path.join(distRoot, 'test-package-two.2.0.zip'), "r")
     >>> files = thezip.namelist()
@@ -142,7 +142,7 @@ verify package two
     >>> 'test-package-two/folder2two/folder2two2/filetwo2.txt' in files
     True
 
-verify the versions list file.
+verify the versions list file::
 
     >>> versions = open(os.path.join(distRoot, 'versions.txt'), 'r')
     >>> for line in versions:
@@ -167,11 +167,12 @@ Prepare Plugins and Themes
 
 We will use the same testing folders and files from previous example.
 
-Make a WordPres Plugin package, could be any PHP file.
+Make a WordPres Plugin package, could be any PHP file::
 
     >>> pluginData = """
     ... /**
     ...  * Plugin Name: Package One
+    ...  * Plugin URI: http://www.pluginone.com
     ...  * Description: this the a dummy testing plugin.
     ...  * Version: 2.3.4
     ...  */
@@ -180,11 +181,12 @@ Make a WordPres Plugin package, could be any PHP file.
     >>> write(packageOne, 'pone.php', pluginData)
 
 Make a WordPress Theme package, 
-has to be the exact file name **style.css**.
+has to be the exact file name **style.css**::
 
     >>> themeData = """
     ... /**
     ...  * Theme Name: Package Two Theme.
+    ...  * Theme URI: http://www.themeone.com
     ...  * Description: this is a dummy theme for testing.
     ...  * Version: 3.4.5
     ...  * other header content.
@@ -196,7 +198,7 @@ has to be the exact file name **style.css**.
 Create the buildout file
 ------------------------
 
-The buildout will be very simple.
+The buildout will be very simple::
 
     >>> write(sample_buildout, 'buildout.cfg',
     ... """
@@ -222,7 +224,7 @@ The buildout will be very simple.
 Execute and Verify
 ------------------
 
-Execute the buildout
+Execute the buildout::
 
     >>> os.chdir(sample_buildout)
     >>> print(system(buildout))
@@ -233,7 +235,7 @@ Execute the buildout
     ...
 
 Read the zip file and verify the content.
-We will expect the following files are created:
+We will expect the following files are created::
 
     >>> pOne = os.path.join(distRoot, 'test-package-one.2.3.4.zip')
     >>> os.path.exists(pOne)

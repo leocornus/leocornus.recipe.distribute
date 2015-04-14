@@ -26,7 +26,7 @@ we need search the following file types:
 import modules
 --------------
 
-We will using the following modules:
+We will using the following modules::
 
     >>> import os
     >>> import shutil
@@ -36,11 +36,11 @@ We will using the following modules:
 Preparing folders and files
 ---------------------------
 
-We will using the home folder for testing.
+We will using the home folder for testing.::
 
     >>> homeFolder = os.path.expanduser('~')
 
-Create folders.
+Create folders.::
 
     >>> testFolder = os.path.join(homeFolder, 'testFolder')
     >>> folderOne = os.path.join(testFolder, 'folderOne')
@@ -56,7 +56,7 @@ Create folders.
     True
 
 open file to write. the mode **r+** is for both read and write
-a file.
+a file.::
 
     >>> fileOne = os.path.join(folderOne, 'fileone.txt')
     >>> fileTwo = os.path.join(folderTwo, 'filetwo.txt')
@@ -83,7 +83,7 @@ a file.
     'This is line three\n'
     >>> f.close()
 
-Try to search the file name filename pattern
+Try to search the file name filename pattern::
 
     >>> files = os.listdir(testFolder)
     >>> 'folderOne' in files
@@ -112,6 +112,6 @@ Create a file for read and search...
 Clean up
 --------
 
-remove the whole test folder.
+remove the whole test folder.::
 
     >>> shutil.rmtree(testFolder)
