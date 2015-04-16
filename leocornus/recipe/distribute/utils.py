@@ -72,7 +72,7 @@ class MwrcSite(object):
 
         ret = {}
         # check the update_wiki option.
-        if self.mw_info['update_wiki'] == "no":
+        if self.mw_info['update_wiki'] != "yes":
             # wiki access not configured, skip.
             ret['status'] = 'skip'
             ret['message'] = 'Wiki update is OFF'
@@ -85,14 +85,16 @@ class MwrcSite(object):
         # 2. page content will depend on the page exist or not!
         if self.page_exists(title):
             wiki_ret = self.replace_page(title, values, comment)
+            wiki_ret['action'] = 'update'
         else: 
             # create new page.
             wiki_template = self.templates['wiki_template']
             content = wiki_template % values
             wiki_ret = self.create_page(title, content, comment)
+            wiki_ret['action'] = 'create'
         # wrap up the wiki return
-        ret['status'] = wiki_ret['result']
-        ret['message'] = "Page Title: %s" % wiki_ret['title']
+        ret['status'] = "[%(action)s: %(result)s]" % wiki_ret
+        ret['message'] = "Page Title: %(title)s" % wiki_ret
 
     def page_exists(self, title):
         """return true if a wiki page with the same title exists
