@@ -6,6 +6,7 @@ import os
 import zipfile
 import subprocess
 from leocornus.recipe.distribute.utils import extract_wp_header
+from leocornus.recipe.distribute.utils import MwrcSite
 
 class Dist:
     """The main class.
@@ -23,6 +24,12 @@ class Dist:
         options.setdefault('dist-format', 'zip')
         options.setdefault('output-root', 
             buildout['buildout']['parts-directory'])
+        options.setdefault('update-wiki', 'off')
+        options.setdefault('wiki-rc-file', '~/.mwrc')
+
+        # get the wiki resource file:
+        mwrc = options.get('wiki-rc-file').strip()
+        self.wiki_site = MwrcSite(mwrc)
 
         # get the packages options.
         pkgs = options.get('packages', '').strip()
@@ -44,7 +51,7 @@ class Dist:
             for package in pkgs:
                 if package.strip():
                     name, version = package.strip().split('=')
-                    header = {"Version" : version}
+                    header = {"latest_version" : version}
                     self.packages.append([name, header])
 
     # install method.
@@ -58,9 +65,13 @@ class Dist:
 
         sourceRoot = self.options.get('source-root')
         outputRoot = self.options.get('output-root')
-        format = self.options.get('dist-format')
 
         #  TODO: only support zip format for now.
+        format = self.options.get('dist-format')
+
+        # update wiki or not?
+        mwrc = self.options.get('wiki-rc-file')
+        updateWiki = self.options.get('update-wiki')
 
         return self.zipdist(sourceRoot, outputRoot, self.packages)
 
@@ -97,10 +108,10 @@ class Dist:
             pkgName = os.path.basename(dirName)
             # Version pattern is not found, give
             # default version 1.0
-            header = extract_wp_header(package.decode('ascii'), 
-                                       Version='1.0')
+            headers = self.wiki_site.template_values(
+                package.decode('ascii'), pkgName)
             # logging the message...
-            pkgs.append([pkgName, header])
+            pkgs.append([pkgName, headers])
 
         return pkgs
 
@@ -119,7 +130,7 @@ class Dist:
         # work on the srouce root dir.
         os.chdir(srcRoot)
         for package, header in packages:
-            version = header['Version']
+            version = header['latest_version']
             # write to versions list
             versions.write("""%s=%s\n""" % (package, version))
             # preparing the zip file name
