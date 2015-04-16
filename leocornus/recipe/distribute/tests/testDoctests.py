@@ -20,7 +20,6 @@ def setUp(test):
 
     buildoutSetUp(test)
     install_develop('leocornus.recipe.distribute', test)
-    install_develop('leocornus.py.sandbox', test)
     install('mwclient', test)
     install('requests', test)
     install('six', test)

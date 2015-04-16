@@ -47,8 +47,7 @@ setup(
       'setuptools',
       'mwclient',
       'requests',
-      'six',
-      'leocornus.py.sandbox'],
+      'six'],
     extras_require={
       'test' : ['zope.testing'],
     },
