@@ -104,8 +104,10 @@ run the buildout::
     >>> print(system(buildout))
     Installing test-source-dist.
     test-source-dist: Found 2 packages in total!
+    test-source-dist: Processing 1 of 2 packages - test-package-one
     test-source-dist: Creating package: .../dist-root/test-package-one.1.0.zip
     test-source-dist: Wiki Update: skip - Wiki update is OFF
+    test-source-dist: Processing 2 of 2 packages - test-package-two
     test-source-dist: Creating package: .../dist-root/test-package-two.2.0.zip
     test-source-dist: Wiki Update: skip - Wiki update is OFF
     test-source-dist: Creating versions list file: .../dist-root/versions.txt...
@@ -234,8 +236,10 @@ Execute the buildout::
     Uninstalling test-source-dist.
     Installing test-source-dist.
     test-source-dist: Found 2 packages in total!
+    test-source-dist: Processing 1 of 2 packages - test-package-one
     test-source-dist: Creating package: .../test-package-one.2.3.4.zip
     test-source-dist: Wiki Update: skip - Wiki update is OFF
+    test-source-dist: Processing 2 of 2 packages - test-package-two
     test-source-dist: Creating package: .../test-package-two.3.4.5.zip
     test-source-dist: Wiki Update: skip - Wiki update is OFF
     ...

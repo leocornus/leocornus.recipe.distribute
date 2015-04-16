@@ -126,12 +126,18 @@ class Dist:
         # work on the srouce root dir, so we could have the 
         # correct path for each package.
         os.chdir(srcRoot)
+        index = 0
+        total = len(packages)
         for package, header in packages:
+            index = index + 1
+            # Logging the progress...
+            log.info('Processing %s of %s packages - %s' % 
+                     (index, total, package))
             version = header['latest_version']
             # write to versions list
             versions.write("""%s=%s\n""" % (package, version))
             # preparing the zip file name
-            zipFilename = package + b"." + version + b".zip"
+            zipFilename = "%s.%s.zip" % (package, version)
             # we need the full path.
             zipFilename = os.path.join(distRoot, zipFilename)
             log.info('Creating package: %s' % zipFilename)
