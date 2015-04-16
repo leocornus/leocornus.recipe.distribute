@@ -7,6 +7,7 @@ from doctest import NORMALIZE_WHITESPACE
 
 from zc.buildout.testing import buildoutSetUp
 from zc.buildout.testing import install_develop
+from zc.buildout.testing import install
 from zc.buildout.testing import buildoutTearDown
 
 __author__ = "Sean Chen"
@@ -19,6 +20,10 @@ def setUp(test):
 
     buildoutSetUp(test)
     install_develop('leocornus.recipe.distribute', test)
+    install_develop('leocornus.py.sandbox', test)
+    install('mwclient', test)
+    install('requests', test)
+    install('six', test)
 
 def test_suite():
 

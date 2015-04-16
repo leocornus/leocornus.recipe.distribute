@@ -43,12 +43,17 @@ setup(
 
     zip_safe=False,
     install_requires = [
-      'zc.buildout >= 1.4.0',
-      'setuptools',],
+      'zc.buildout',
+      'setuptools',
+      'mwclient',
+      'requests',
+      'six',
+      'leocornus.py.sandbox'],
     extras_require={
       'test' : ['zope.testing'],
     },
-    tests_require = ['zope.testing'],
+    tests_require = ['zope.testing', 'mwclient',
+    ],
     test_suite = '%s.tests.testDoctests.test_suite' % name,
 
     entry_points = { 'zc.buildout' : ['default = leocornus.recipe.distribute:Dist',
