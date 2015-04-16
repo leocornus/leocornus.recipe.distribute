@@ -18,8 +18,6 @@ New recipe options
 
 design new options for this recipe.
 
-:update-wiki:
-  switch to turn on or off wiki connection. default is **off**.
 :wiki-rc-file:
   the full path to the .mwrc file. default is **~/.mwrc**.
 
@@ -32,16 +30,20 @@ Sample of .mwrc file
 Here is a sample .mwrc file::
 
   [mwclient]
+  update_wiki = yes
   host = domain.name.com
   path = /wiki/
   username = seanchen
   password = mypassword
 
   [template fields]
+  title: %(name)s
+  comment: release 2.4
   internet_page: [%(package_uri)s plugin homepage]
   download: [http://www.bases.com/repos/%(package_name)s.%(latest_version)s.zip %(package_name)s.%(latest_version)s.zip]
 
   [template]
+  version_field: latest_version
   wiki_template: {{Feature Infobox
     |name=%(name)s
     |internet_page=%(internet_page)s
