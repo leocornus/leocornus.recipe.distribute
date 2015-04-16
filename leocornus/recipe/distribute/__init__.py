@@ -24,7 +24,6 @@ class Dist:
         options.setdefault('dist-format', 'zip')
         options.setdefault('output-root', 
             buildout['buildout']['parts-directory'])
-        options.setdefault('update-wiki', 'off')
         options.setdefault('wiki-rc-file', '~/.mwrc')
 
         # get the wiki resource file:
@@ -69,10 +68,6 @@ class Dist:
         #  TODO: only support zip format for now.
         format = self.options.get('dist-format')
 
-        # update wiki or not?
-        mwrc = self.options.get('wiki-rc-file')
-        updateWiki = self.options.get('update-wiki')
-
         return self.zipdist(sourceRoot, outputRoot, self.packages)
 
     # update method.
@@ -83,6 +78,7 @@ class Dist:
     # query source folder to find WordPress Plugins or Themes.
     def wpPackages(self, srcRoot):
 
+        log = logging.getLogger(self.name)
         # using grep the query files in the source folder.
         # the plugin grep query pattern.
         pluginP = "grep -l 'Plugin Name: ' %s/*/*.php" % srcRoot
@@ -110,7 +106,6 @@ class Dist:
             # default version 1.0
             headers = self.wiki_site.template_values(
                 package.decode('ascii'), pkgName)
-            # logging the message...
             pkgs.append([pkgName, headers])
 
         return pkgs
@@ -153,6 +148,12 @@ class Dist:
             # close to write to disk.
             zip.close()
             parts.append(zipFilename)
+
+            # call update_wiki method, the return value should
+            # provide the status: create new, update, or error!
+            ret = self.wiki_site.update_wiki(header)
+            # logging the status message...
+            log.info('Wiki Update: %(status)s - %(message)s' % ret)
 
         # save the versions list file.
         log.info('Creating versions list file: %s' % versionsList)

@@ -104,7 +104,9 @@ run the buildout::
     >>> print(system(buildout))
     Installing test-source-dist.
     test-source-dist: Creating package: .../dist-root/test-package-one.1.0.zip
+    test-source-dist: Wiki Update: skip - Wiki update is OFF
     test-source-dist: Creating package: .../dist-root/test-package-two.2.0.zip
+    test-source-dist: Wiki Update: skip - Wiki update is OFF
     test-source-dist: Creating versions list file: .../dist-root/versions.txt...
 
 Read the dist file to verify the result.::
@@ -227,7 +229,9 @@ Execute the buildout::
     Uninstalling test-source-dist.
     Installing test-source-dist.
     test-source-dist: Creating package: .../test-package-one.2.3.4.zip
+    test-source-dist: Wiki Update: skip - Wiki update is OFF
     test-source-dist: Creating package: .../test-package-two.3.4.5.zip
+    test-source-dist: Wiki Update: skip - Wiki update is OFF
     ...
 
 Read the zip file and verify the content.
