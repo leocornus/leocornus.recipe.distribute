@@ -60,6 +60,8 @@ class Dist:
             # return without do anything.
             log.info('No Package Specified!')
             return []
+        # log totale number of packages:
+        log.info("Found %s packages in total!" % len(self.packages))
 
         sourceRoot = self.options.get('source-root')
         outputRoot = self.options.get('output-root')

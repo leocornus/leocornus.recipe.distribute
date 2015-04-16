@@ -103,6 +103,7 @@ run the buildout::
     >>> os.chdir(sample_buildout)
     >>> print(system(buildout))
     Installing test-source-dist.
+    test-source-dist: Found 2 packages in total!
     test-source-dist: Creating package: .../dist-root/test-package-one.1.0.zip
     test-source-dist: Wiki Update: skip - Wiki update is OFF
     test-source-dist: Creating package: .../dist-root/test-package-two.2.0.zip
@@ -232,6 +233,7 @@ Execute the buildout::
     >>> print(system(buildout))
     Uninstalling test-source-dist.
     Installing test-source-dist.
+    test-source-dist: Found 2 packages in total!
     test-source-dist: Creating package: .../test-package-one.2.3.4.zip
     test-source-dist: Wiki Update: skip - Wiki update is OFF
     test-source-dist: Creating package: .../test-package-two.3.4.5.zip
