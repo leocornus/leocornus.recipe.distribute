@@ -127,7 +127,8 @@ class Dist:
         versionsList = os.path.join(distRoot, 'versions.txt')
         versions = open(versionsList, 'w')
 
-        # work on the srouce root dir.
+        # work on the srouce root dir, so we could have the 
+        # correct path for each package.
         os.chdir(srcRoot)
         for package, header in packages:
             version = header['latest_version']
@@ -141,11 +142,14 @@ class Dist:
 
             zip = zipfile.ZipFile(zipFilename, "w",
                 compression = zipfile.ZIP_DEFLATED)
-            for dirpath, dirnames, filenames in os.walk(b'./' + package):
+            # current folder is srcRoot
+            for dirpath, dirnames, filenames in os.walk(package):
                 for name in filenames:
-                    path = os.path.normpath(os.path.join(dirpath, name))
-                    if os.path.isfile(path):
-                        zip.write(path, path)
+                    # remove redundant separators and 
+                    # up-level references
+                    path = os.path.join(dirpath, name)
+                    path = os.path.normpath(path)
+                    zip.write(path)
             # close to write to disk.
             zip.close()
             parts.append(zipFilename)

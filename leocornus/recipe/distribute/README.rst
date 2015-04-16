@@ -4,31 +4,25 @@
 Overview
 ========
 
-Let's get start.
-
-    >>> print('Hello')
-    Hello
+This buildout_ recipe provides a easy way to manage multiple packages
+with different types.
 
 Options
 =======
 
-``source-root``
+:source-root:
+  The root directory where we find out the packages' source files.
 
-    The root directory where we find out the packages' source files.
+:packages:
+  A list of packages' name followed with verion number.
 
-``packages``
+:dist-format:
+  Available formats: zip, tar, gztar, bztar.
+  Default format is ``zip``.
 
-    A list of packages' name followed with verion number.
-
-``dist-format``
-
-    Available formats: zip, tar, gztar, bztar.
-    Default format is ``zip``.
-
-``output-root``
-
-    The output root dir, where the archived file saved.  
-    Default is parts directory.
+:output-root:
+  The output root dir, where the archived file saved.  
+  Default is parts directory.
 
 Sample for distribute exact packages
 ====================================
@@ -118,6 +112,8 @@ Read the dist file to verify the result.::
     >>> import zipfile
     >>> thezip = zipfile.ZipFile(os.path.join(distRoot, 'test-package-one.1.0.zip'), "r")
     >>> files = thezip.namelist()
+    >>> print(files)
+    ['test-package-one/...']
     >>> len(files)
     4
     >>> 'test-package-one/README.txt' in files
@@ -243,3 +239,5 @@ We will expect the following files are created::
     >>> tTwo = os.path.join(distRoot, 'test-package-two.3.4.5.zip')
     >>> os.path.exists(tTwo)
     True
+
+.. _buildout: https://github.com/buildout/buildout
