@@ -242,6 +242,9 @@ class MwrcSite(object):
 
             try:
                 value = subprocess.check_output(grep_pat, shell=True)
+                # we only handle the first occurance, to avoid the
+                # duplicate header pattern issue.
+                value = value.splitlines()[0]
                 # only split the first ":"
                 value = value.strip().split(b":", 1)
                 ret[field_name] = value[1].strip()

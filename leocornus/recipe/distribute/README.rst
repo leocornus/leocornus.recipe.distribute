@@ -175,6 +175,8 @@ Make a WordPres Plugin package, could be any PHP file::
     ...  * Version: 2.3.4
     ...  */
     ... ** Some other content.
+    ... Testing the case for duplicate header patterns.
+    ... Version: 4.5
     ... """
     >>> write(packageOne, 'pone.php', pluginData)
 
@@ -190,6 +192,8 @@ has to be the exact file name **style.css**::
     ...  * other header content.
     ...  */
     ... ** other style contnet.
+    ... Another duplicate header pattern.
+    ... Theme Name: fake one.
     ... """
     >>> write(packagetwo, 'style.css', themeData)
 

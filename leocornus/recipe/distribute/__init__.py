@@ -5,7 +5,6 @@ import logging
 import os
 import zipfile
 import subprocess
-from leocornus.recipe.distribute.utils import extract_wp_header
 from leocornus.recipe.distribute.utils import MwrcSite
 
 class Dist:
