@@ -95,6 +95,7 @@ class MwrcSite(object):
         # wrap up the wiki return
         ret['status'] = "[%(action)s: %(result)s]" % wiki_ret
         ret['message'] = "Page Title: %(title)s" % wiki_ret
+        return ret
 
     def page_exists(self, title):
         """return true if a wiki page with the same title exists
