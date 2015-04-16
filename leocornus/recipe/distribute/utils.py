@@ -3,8 +3,13 @@
 # save some utility functions here.
 
 import os
+import re
 import subprocess
 import mwclient
+try:
+    import ConfigParser as configparser
+except ImportError:
+    import configparser
 
 __author__ = "Sean Chen"
 __email__ = "sean.chen@leocorn.com"
@@ -89,6 +94,7 @@ class MwrcSite(object):
             self.rcfile = os.path.join(homeFolder, '.mwrc')
 
         self.site = None
+        self.mw_info = {}
         self.headers_info = None
         self.headers_default = None
         self.template_info = None
@@ -101,19 +107,53 @@ class MwrcSite(object):
             filename = rc.read(self.rcfile)
             self.headers_info = rc.items('headers')
             self.headers_default = dict(rc.items('headers default'))
+            # needs the set the raw to True
             self.templates = dict(rc.items('template', True))
             self.template_fields = rc.items('template fields', True)
-            mwinfo = dict(rc.items('mwclient'))
-            # TODO: need check if those values are set properly!
-            if mwinfo.has_key('host'):
-                self.site = mwclient.Site(mwinfo['host'], 
-                                          path=mwinfo['path'])
-                self.site.login(mwinfo['username'], 
-                                mwinfo['password'])
+            self.mw_info = dict(rc.items('mwclient'))
+            if not self.mw_info.has_key('update_wiki'):
+                # update_wiki not set, give the default value.
+                self.mw_info['update_wiki'] = 'no'
+            if self.mw_info['update_wiki'] == 'yes':
+                # try to create the mwclient site instance.
+                self.site = mwclient.Site(self.mw_info['host'], 
+                                          path=self.mw_info['path'])
+                self.site.login(self.mw_info['username'], 
+                                self.mw_info['password'])
         else:
             # need set up the default values for header info.
             # only need version.
             self.headers_info = [('latest_version', 'Version:.*')]
+            # set update _wiki to no
+            self.mw_info['update_wiki'] = 'no'
+
+    def update_wiki(self, values):
+        """Update wiki based on the given values.
+        """
+
+        ret = {}
+        # check the update_wiki option.
+        if self.mw_info['update_wiki'] == "no":
+            # wiki access not configured, skip.
+            ret['status'] = 'skip'
+            ret['message'] = 'Wiki update is OFF'
+            return ret
+
+        # we should have site already, let's start the wiki update.
+        # 1. get ready the title and comment
+        title = values['title']
+        comment = values['comment']
+        # 2. page content will depend on the page exist or not!
+        if self.page_exists(title):
+            wiki_ret = self.replace_page(title, values, comment)
+        else: 
+            # create new page.
+            wiki_template = self.templates['wiki_template']
+            content = wiki_template % values
+            wiki_ret = self.create_page(title, content, comment)
+        # wrap up the wiki return
+        ret['status'] = wiki_ret['result']
+        ret['message'] = "Page Title: %s" % wiki_ret['title']
 
     def page_exists(self, title):
         """return true if a wiki page with the same title exists
