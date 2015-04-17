@@ -83,8 +83,9 @@ class MwrcSite(object):
         title = values['title']
         comment = values['comment']
         # 2. page content will depend on the page exist or not!
-        if self.page_exists(title):
-            wiki_ret = self.replace_page(title, values, comment)
+        thepage = self.site.Pages[title]
+        if thepage.exists:
+            wiki_ret = self.replace_page(thepage, values, comment)
             wiki_ret['action'] = 'update'
         else: 
             # create new page.
@@ -121,36 +122,52 @@ class MwrcSite(object):
 
         return ret
 
-    def replace_page(self, title, values={}, comment=""):
+    def replace_page(self, thepage, values={}, comment=""):
         """Replace the page with new values.
+        we will only process the template content and leave
+        other content as it is.
         """
 
-        if self.site == None:
-            return None
+        # the original conent.
+        org_content = thepage.edit()
+        # get template name from values.
+        p = re.compile("{{(%s.*)}}" % values['template_name'],
+                       re.DOTALL)
+        # try to find the template content.
+        matches = p.findall(org_content)
+        if len(matches) == 0:
+            # no template exist! add the template at beginning.
+            tpl_content = self.templates['wiki_template'] % values
+            new_content = "%s\n%s" % (tpl_content, org_content)
         else:
-            thepage = self.site.Pages[title]
-            content = thepage.edit()
+            # only handle the first match.
+            # the original template content
+            org_tpl_content = matches[0]
             # replace new line with empty string.
             p = re.compile('\\n\|')
-            onelineContent = p.sub('|', content)
-            # get the template source in one line.
-            p = re.compile('{{(.*)}}')
-            temps = p.findall(onelineContent)
-            oneline = temps[0]
+            oneline_content = p.sub('|', org_tpl_content)
             # replace | to \n as the standard template format.
             p = re.compile('\|')
-            lines = p.sub('\\n|', oneline)
+            new_tpl_content = p.sub('\\n|', oneline_content)
             # now for each new value to replace.
             for key, value in values.items():
-                p = re.compile("""%s=.*""" % key)
-                lines = p.sub("""%s=%s""" % (key, value), lines)
-            # make the replaced content in one line too
-            p = re.compile('\\n\|')
-            replaced = p.sub('|', lines);
-            onelineContent = onelineContent.replace(oneline, 
-                                                    replaced)
-            ret = thepage.save(onelineContent, summary=comment)
-            return ret
+                p = re.compile("""%s[\s]*=.*""" % key)
+                new_tpl_content = p.sub("""%s=%s""" % (key, value), 
+                                        new_tpl_content)
+
+            # replace the original conent with new standard content.
+            new_content = org_content.replace(org_tpl_content, 
+                                              new_tpl_content)
+
+        # save the new content back only it is changned.
+        if org_content == new_content:
+            # skip 
+            ret = {"result": "No Change", "title": thepage.name}
+        else:
+            # save it with comment.
+            ret = thepage.save(new_content, summary=comment)
+
+        return ret
 
     def template_values(self, filepath, pkg_name):
         """get ready all need values for the wiki template.
