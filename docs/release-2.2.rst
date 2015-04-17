@@ -4,6 +4,9 @@ Release 2.2
 
 - Ability to save the summary of all packages as MediaWiki page.
 
+.. contents:: Table of Contents
+   :depth: 5
+
 MediaWiki Dependence
 --------------------
 
@@ -39,12 +42,13 @@ Here is a sample .mwrc file::
   [template fields]
   title: %(name)s
   comment: release 2.4
+  template_name: Feature Infobox
   internet_page: [%(package_uri)s plugin homepage]
   download: [http://www.bases.com/repos/%(package_name)s.%(latest_version)s.zip %(package_name)s.%(latest_version)s.zip]
 
   [template]
   version_field: latest_version
-  wiki_template: {{Feature Infobox
+  wiki_template: {{%(template_name)s
     |name=%(name)s
     |internet_page=%(internet_page)s
     |description=%(description)s
@@ -77,6 +81,7 @@ Steps to process each package:
 #. Prepare the values for wiki template.
    The section **template fields** defines the template fields,
    which need process before fill in the template.
+#. 
 
 How to handle wiki page?
 ------------------------
@@ -93,6 +98,11 @@ There are 3 cases:
    We just need add the new content at the beginning of the page.
 #. wiki page exist and the template exist.
    Then perform the replace process...
+
+Test cases
+----------
+
+Test cases are explained in file 
 
 Questions
 ---------
