@@ -78,6 +78,22 @@ Steps to process each package:
    The section **template fields** defines the template fields,
    which need process before fill in the template.
 
+How to handle wiki page?
+------------------------
+
+Basically we try to answer the question
+"Should I create or update the wiki page?".
+There are 3 cases:
+
+#. no such wiki page exist! 
+   This is the simple case. We just need create a new one.
+#. wiki page exist! BUT the wiki page don't have the template!
+   So we will append the template at beginning of the page.
+   This is very much like the first case.
+   We just need add the new content at the beginning of the page.
+#. wiki page exist and the template exist.
+   Then perform the replace process...
+
 Questions
 ---------
 
