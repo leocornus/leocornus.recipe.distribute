@@ -29,7 +29,8 @@ More details in
 Change Logs
 -----------
 
-- `Release 2.2.0 <docs/release-2.2.rst>`_
+- `Release 2.1.6 <docs/release-2.1.6.rst>`_ [Developing]
+- `Release 2.1.5 <docs/release-2.1.5.rst>`_
 
 License
 -------
